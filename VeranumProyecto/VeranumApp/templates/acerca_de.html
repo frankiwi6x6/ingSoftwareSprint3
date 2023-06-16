@@ -1,0 +1,100 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block navbar %}
+<ul class="navbar-nav">
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'buscar_habitaciones' %}">Inicio</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'servicios' %}">Servicios</a>
+    </li>
+    <li class="nav-item active">
+        <a class="nav-link" href="{% url 'acerca_de' %}">Acerca de</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="#">Contacto</a>
+    </li>
+</ul>
+<ul class="navbar-nav ml-auto login">
+    <button class="btn">
+        {% if user.is_authenticated %}
+        <li class="nav-item">
+            <a class="nav-link" href="#">{{ user.username }}</a>
+        </li>
+        {% else %}
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'cuenta' %}"><i class="bi bi-person"></i>&nbsp;Iniciar
+                sesión</a>
+        </li>
+        {% endif %}
+    </button>
+</ul>
+{% endblock %}
+{% block content %}
+
+<div class="content contenido-acerca-de">
+    <h1>Acerca de Veranum</h1>
+    <hr>
+    <p>
+        Bienvenido a los Hoteles Veranum.</p>
+    <p>
+        Nos enorgullece ofrecerte una experiencia excepcional en hospedaje. Con una
+        trayectoria de 30 años en la administración hotelera, contamos con dos hoteles estratégicamente ubicados, uno en
+        Santiago y otro en la V Región.</p>
+    <div class="imagenes">
+        <div class="polaroid">
+            <img src="{% static 'img/hotel-vina-Chile.jpg' %}" alt="Hotel Viña del Mar, Chile">
+            <div class="texto">Hotel Viña del Mar, Chile</div>
+        </div>
+        <div class="polaroid">
+            <img src="{% static 'img/hotel-santiago-Chile.jpg' %}" alt="Hotel Santiago, Chile">
+            <div class="texto">Hotel Santiago, Chile</div>
+        </div>
+    </div>
+
+    <p>
+        En Veranum, nuestra filosofía se basa en ser una empresa cercana a nuestros clientes, manteniendo un contacto
+        fluido y brindando un servicio personalizado. Nos esforzamos por crear un ambiente acogedor y adaptado a tus
+        necesidades.
+        Hemos ambientado nuestros hoteles según el segmento etario de nuestros clientes, para asegurarnos de brindar una
+        experiencia única y personalizada.
+    </p>
+    <p>
+        A pesar de estar en un mercado competitivo, en Veranum nos destacamos por nuestro enfoque en el traspaso de
+        información entre personas. Podrás encontrar nuestras ofertas en lugares como rodoviarios de la costa central y
+        terminales de buses en Santiago.
+    </p>
+    <p>
+        Nuestro principal objetivo es ofrecerte un servicio integral de alojamiento y servicios de alimentación.
+        Disponemos de habitaciones de diferentes tipos, adaptadas a tus preferencias y con precios competitivos.
+        Realizar una
+        reserva en Veranum es rápido y sencillo. Nuestro equipo de ventas está disponible para atenderte y brindarte
+        toda la
+        información necesaria sobre tipos de habitaciones, precios y servicios disponibles. Tu reserva quedará
+        registrada en nuestro libro de reservas, evitando dobles reservas y asegurando la disponibilidad de la
+        habitación
+        seleccionada.
+    </p>
+    <p>
+        Al llegar a nuestros hoteles, podrás disfrutar de nuestras instalaciones y cancelar tu estadía. Si surge alguna
+        diferencia en los días de tu estancia o los servicios contratados, nuestro personal estará encantado de ayudarte
+        a resolver cualquier situación. Además, nos preocupamos por ofrecerte servicios adicionales que complementen tu
+        estadía, como opciones de lavandería para tu conveniencia.
+    </p>
+    <p>
+        En Veranum, nos comprometemos a mejorar constantemente nuestros servicios y adaptarnos a tus necesidades.
+        Valoramos tu confianza y nos esforzamos por mantener altos estándares de calidad en nuestros hoteles. Te
+        invitamos a
+        explorar nuestro sitio web, donde encontrarás más información sobre nuestros servicios y promociones vigentes.
+        También
+        podrás realizar reservas en línea para cualquiera de nuestros hoteles.
+    </p>
+    <p>
+        En los Hoteles Veranum, tu satisfacción es nuestra prioridad. Estamos ansiosos por recibirte y brindarte una
+        experiencia inolvidable en hospedaje. ¡Te esperamos con los brazos abiertos!
+    </p>
+</div>
+
+{% endblock %}

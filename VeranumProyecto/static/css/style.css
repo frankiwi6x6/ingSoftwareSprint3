@@ -1,0 +1,131 @@
+html {
+    scroll-behavior: ;
+}
+
+.imagen-habitacion {
+    height: 100%;
+    width: 300px;
+}
+
+.precio {
+    font-weight: 800;
+}
+
+.reserva button {
+    background-color: #FF8750;
+    color: white;
+    font-weight: 500;
+}
+
+.reserva button:hover {
+    background-color: #643520;
+    color: white;
+    font-weight: 500;
+}
+
+.card .media img {
+    width: 300px;
+    /* Cambia el valor según tus preferencias */
+    height: auto;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+.horario p {
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+.abierto24 {
+    font-style: oblique;
+}
+
+.foto-icono {
+    width: 48px;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+}
+
+.contenido-acerca-de {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 40px;
+  background-color: #f5f5f5;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.contenido-acerca-de h1 {
+  font-size: 32px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.contenido-acerca-de p {
+  font-size: 16px;
+  line-height: 1.6;
+  color: #666;
+  margin-bottom: 20px;
+}
+  
+  .imagenes {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .polaroid {
+    position: relative;
+    width: 300px;
+    height: 350px;
+    margin-bottom: 20px;
+    background-color: #ffffff;
+    border: 1px solid #dddddd;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-right: 10px; /* Separación entre las imágenes */
+  }
+  
+  .polaroid:last-child {
+    margin-right: 0; /* Eliminar el margen derecho para la última imagen */
+  }
+  
+  .polaroid img {
+    display: block;
+    width: 100%;
+    padding: 20px;
+    object-fit: cover;
+  }
+  
+  .polaroid .texto {
+    position: absolute;
+    bottom: 0;
+    left: 20px;
+    width: calc(100% - 40px);
+    padding-left: 4px;
+    padding-bottom: 15px;
+    background-color: #ffffff;
+    text-align: left;
+    font-size: 24px;
+    color: #333333;
+    font-family: 'Satisfy', cursive;
+  }
+  
+  .imagenes {
+    display: flex;
+    justify-content: center;
+  }
+.login button{
+  border: 1px #ff8650;
+  background-color: #ff8650;
+}
+.login button:hover{
+  border: 1px #f05030;
+  background-color:#f05030;
+}
+.login button:active{
+  border: 1px #f05030;
+  background-color:#f05030;
+}

@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+
+{% block title %}Veranum Hoteles - Reserva{% endblock %}
+{% block navbar %}
+<ul class="navbar-nav">
+    <li class="nav-item active">
+        <a class="nav-link" href="{% url 'buscar_habitaciones' %}">Inicio</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'servicios' %}">Servicios</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'acerca_de' %}">Acerca de</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="#">Contacto</a>
+    </li>
+</ul>
+<ul class="navbar-nav ml-auto login">
+    <button class="btn">
+        {% if user.is_authenticated %}
+        <li class="nav-item">
+            <a class="nav-link" href="#">{{ user.username }}</a>
+        </li>
+        {% else %}
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'cuenta' %}"><i class="bi bi-person"></i>&nbsp;Iniciar
+                sesión</a>
+        </li>
+        {% endif %}
+    </button>
+</ul>
+{% endblock %}
+{% block content %}
+<div class="buscar-habitaciones">
+    <form method="POST" action="{% url 'resultados_habitaciones' %}">
+
+        {% csrf_token %}
+        <div class="form-row">
+            <div class="col-md-4 mb-3">
+                <label for="fecha-entrada">Fecha de entrada:</label>
+                <input type="date" class="form-control datepicker" name="fecha-entrada" id="fecha-entrada">
+            </div>
+            <div class="offset-1 col-md-4 mb-3">
+                <label for="fecha-salida">Fecha de salida:</label>
+                <input type="date" class="form-control datepicker" name="fecha-salida" id="fecha-salida">
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="col-md-4 mb-3">
+                <label for="sucursal">Hotel:</label>
+                <br>
+                <select name="sucursal" class="form-control">
+                    {% for hotel in hoteles %}
+                    <option value="{{ hotel.idHotel }}">{{ hotel.nombre }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="offset-1 col-md-4 mb-3">
+                <label for="personas">Número de personas:</label>
+                <input type="number" class="form-control" name="personas" id="personas">
+            </div>
+        </div>
+        <div>
+            <button type="submit" class="col-md-9 mt-3 btn btn-primary">RESERVAR HABITACIÓN AHORA</button>
+        </div>
+    </form>
+</div>
+
+
+{% endblock %}
