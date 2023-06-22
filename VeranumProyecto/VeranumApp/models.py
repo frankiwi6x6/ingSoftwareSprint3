@@ -1,6 +1,5 @@
 from django.db import models
-
-# Create your models here.
+from django.contrib.auth.models import User
 
 class Hotel(models.Model):
     idHotel = models.AutoField(primary_key=True)
@@ -8,7 +7,7 @@ class Hotel(models.Model):
     ubicacion = models.CharField(max_length=100)
     num_habitaciones = models.IntegerField()
 
-    def __str__(self): 
+    def __str__(self):
         return self.nombre
 
 class TipoHabitacion(models.Model):
@@ -16,10 +15,9 @@ class TipoHabitacion(models.Model):
     nombre = models.CharField(max_length=100)
     descripcion = models.TextField(max_length=400)
 
-
     def __str__(self):
         return self.nombre
-    
+
 class Habitacion(models.Model):
     idHotel = models.ForeignKey(Hotel, on_delete=models.CASCADE)
     idHabitacion = models.AutoField(primary_key=True)
@@ -27,6 +25,7 @@ class Habitacion(models.Model):
     tipo = models.ForeignKey(TipoHabitacion, on_delete=models.CASCADE)
     capacidad = models.IntegerField(null=False)
     precioPorNoche = models.DecimalField(max_digits=8, decimal_places=2, null=False, default=200)
+    is_disponible = models.BooleanField(default=True)
     imagen = models.ImageField(default='static/img/habitacion-prueba.jpg', upload_to='static/img')
 
     class Meta:
@@ -34,15 +33,22 @@ class Habitacion(models.Model):
 
     def __str__(self):
         return f'{self.tipo.nombre} - {self.idHotel.nombre}'
-    
+
+class Reserva(models.Model):
+    idHotel = models.ForeignKey(Hotel, on_delete=models.CASCADE)
+    habitacion = models.ForeignKey(Habitacion, on_delete=models.CASCADE)
+    fecha_entrada = models.DateField()
+    fecha_salida = models.DateField()
+    dias_estancia = models.IntegerField()
+    total = models.DecimalField(max_digits=8, decimal_places=2)
+    usuario = models.ForeignKey(User, on_delete=models.CASCADE)
+
 class ServicioHoteleria(models.Model):
     idServicio = models.AutoField(primary_key=True)
     nombre = models.CharField(max_length=100)
-    
 
     def __str__(self):
         return self.nombre
-
 
 class Subservicio(models.Model):
     idSubservicio = models.AutoField(primary_key=True)
@@ -53,6 +59,6 @@ class Subservicio(models.Model):
     servicio = models.ForeignKey(ServicioHoteleria, on_delete=models.CASCADE)
     imagen = models.ImageField(default='static/img/servicio_prueba.jpg', upload_to='static/img')
 
-
     def __str__(self):
         return self.nombre
+

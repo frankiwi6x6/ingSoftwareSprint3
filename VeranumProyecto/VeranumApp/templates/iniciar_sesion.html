@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Veranum Hoteles - Reserva{% endblock %}
+{% block navbar %}
+<ul class="navbar-nav">
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'buscar_habitaciones' %}">Inicio</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'servicios' %}">Servicios</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'acerca_de' %}">Acerca de</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="#">Contacto</a>
+    </li>
+</ul>
+{% endblock %}
+{% block content %}
+
+<body>
+
+
+    <script src="{% static 'js/script.js' %}"></script>
+
+
+    <div id="container" class="container">
+        <div id="login" class="form-container">
+            <h2>Iniciar Sesión</h2>
+            <br>
+            <!-- Formulario de registro -->
+            <form action="{% url 'iniciar_sesion' %}" method="POST">
+                {% csrf_token %}
+                <!-- Campos del formulario -->
+                <div class="form-group">
+                    <input type="text" class="form-control" name="identificador"
+                        placeholder="Nombre de usuario o correo electrónico">
+                </div>
+                <div class="form-group">
+                    <input type="password" class="form-control" name="contraseña" placeholder="Contraseña">
+                </div>
+                <div id="mensaje-error">
+
+                    {% if error_message %}
+                    <p>{{ error_message }}</p>
+                    <style>
+                        #mensaje-error {display: block;}
+                    </style>
+                    {% else %}
+                    <style>
+                        #mensaje-error {display: none;}
+                    </style>
+                    {% endif %}
+                    
+                    </div>
+                <button type="submit" class="btn btn-primary mb-2">Iniciar Sesión</button>
+            </form>
+            <p><a href="{% url 'registrarse' %}" id="enlace-login-registro">¿Aun no tienes cuenta? ¡Registrate aquí!</a>
+            </p>
+            <p><a href="#" id="enlace-recuperar-registro">¿Olvidaste tu contraseña?</a></p>
+
+
+        </div>
+
+</body>
+{% endblock content %}

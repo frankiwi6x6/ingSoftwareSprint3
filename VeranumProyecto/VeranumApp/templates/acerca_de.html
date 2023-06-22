@@ -17,20 +17,6 @@
         <a class="nav-link" href="#">Contacto</a>
     </li>
 </ul>
-<ul class="navbar-nav ml-auto login">
-    <button class="btn">
-        {% if user.is_authenticated %}
-        <li class="nav-item">
-            <a class="nav-link" href="#">{{ user.username }}</a>
-        </li>
-        {% else %}
-        <li class="nav-item">
-            <a class="nav-link" href="{% url 'cuenta' %}"><i class="bi bi-person"></i>&nbsp;Iniciar
-                sesión</a>
-        </li>
-        {% endif %}
-    </button>
-</ul>
 {% endblock %}
 {% block content %}
 

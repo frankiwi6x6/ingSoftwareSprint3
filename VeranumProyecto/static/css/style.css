@@ -1,50 +1,50 @@
 html {
-    scroll-behavior: ;
+  scroll-behavior: ;
 }
 
 .imagen-habitacion {
-    height: 100%;
-    width: 300px;
+  height: 100%;
+  width: 300px;
 }
 
 .precio {
-    font-weight: 800;
+  font-weight: 800;
 }
 
 .reserva button {
-    background-color: #FF8750;
-    color: white;
-    font-weight: 500;
+  background-color: #FF8750;
+  color: white;
+  font-weight: 500;
 }
 
 .reserva button:hover {
-    background-color: #643520;
-    color: white;
-    font-weight: 500;
+  background-color: #643520;
+  color: white;
+  font-weight: 500;
 }
 
 .card .media img {
-    width: 300px;
-    /* Cambia el valor según tus preferencias */
-    height: auto;
-    object-fit: cover;
-    border-radius: 5px;
+  width: 300px;
+  /* Cambia el valor según tus preferencias */
+  height: auto;
+  object-fit: cover;
+  border-radius: 5px;
 }
 
 .horario p {
-    font-weight: bold;
-    margin-right: 10px;
+  font-weight: bold;
+  margin-right: 10px;
 }
 
 .abierto24 {
-    font-style: oblique;
+  font-style: oblique;
 }
 
 .foto-icono {
-    width: 48px;
-    height: auto;
-    display: block;
-    margin: 0 auto;
+  width: 48px;
+  height: auto;
+  display: block;
+  margin: 0 auto;
 }
 
 .contenido-acerca-de {
@@ -69,63 +69,83 @@ html {
   color: #666;
   margin-bottom: 20px;
 }
-  
-  .imagenes {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .polaroid {
-    position: relative;
-    width: 300px;
-    height: 350px;
-    margin-bottom: 20px;
-    background-color: #ffffff;
-    border: 1px solid #dddddd;
-    overflow: hidden;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    margin-right: 10px; /* Separación entre las imágenes */
-  }
-  
-  .polaroid:last-child {
-    margin-right: 0; /* Eliminar el margen derecho para la última imagen */
-  }
-  
-  .polaroid img {
-    display: block;
-    width: 100%;
-    padding: 20px;
-    object-fit: cover;
-  }
-  
-  .polaroid .texto {
-    position: absolute;
-    bottom: 0;
-    left: 20px;
-    width: calc(100% - 40px);
-    padding-left: 4px;
-    padding-bottom: 15px;
-    background-color: #ffffff;
-    text-align: left;
-    font-size: 24px;
-    color: #333333;
-    font-family: 'Satisfy', cursive;
-  }
-  
-  .imagenes {
-    display: flex;
-    justify-content: center;
-  }
-.login button{
+
+.imagenes {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.polaroid {
+  position: relative;
+  width: 300px;
+  height: 350px;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin-right: 10px;
+  /* Separación entre las imágenes */
+}
+
+.polaroid:last-child {
+  margin-right: 0;
+  /* Eliminar el margen derecho para la última imagen */
+}
+
+.polaroid img {
+  display: block;
+  width: 100%;
+  padding: 20px;
+  object-fit: cover;
+}
+
+.polaroid .texto {
+  position: absolute;
+  bottom: 0;
+  left: 20px;
+  width: calc(100% - 40px);
+  padding-left: 4px;
+  padding-bottom: 15px;
+  background-color: #ffffff;
+  text-align: left;
+  font-size: 24px;
+  color: #333333;
+  font-family: 'Satisfy', cursive;
+}
+
+.imagenes {
+  display: flex;
+  justify-content: center;
+}
+
+.login button, .login a {
+
   border: 1px #ff8650;
   background-color: #ff8650;
+  min-width: 120px;
+  min-height: 24px;
+  margin-left: 10px;
+  margin-right: 10px;
 }
-.login button:hover{
+
+.login button:hover {
   border: 1px #f05030;
-  background-color:#f05030;
+  background-color: #f05030;
 }
-.login button:active{
+
+.login button:active {
   border: 1px #f05030;
-  background-color:#f05030;
+  background-color: #f05030;
+}
+
+#mensaje-error {
+  background-color: #ffdddd;
+  color: #cc0000;
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 5px;
+  margin-top: 5px;
+  text-align: left;
 }

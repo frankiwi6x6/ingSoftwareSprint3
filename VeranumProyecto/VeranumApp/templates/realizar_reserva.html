@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% load humanize %}
+
+{% block navbar %}
+<ul class="navbar-nav">
+    <li class="nav-item">
+        <a class="nav-link active" href="{% url 'buscar_habitaciones' %}">Inicio</a>
+    </li>
+    <li class="nav-item ">
+        <a class="nav-link" href="{% url 'servicios' %}">Servicios</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'acerca_de' %}">Acerca de</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="#">Contacto</a>
+    </li>
+</ul>
+
+{% endblock %}
+{% block title %}Veranum Hoteles - Realizar Reserva{% endblock %}
+
+{% block content %}
+<h1>Realizar Reserva</h1>
+<hr>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">Detalles de la reserva</h5>
+                    <p><strong>Hotel:</strong> {{ hotel.nombre }}</p>
+                    <p><strong>Habitación:</strong> {{ habitacion.numeroHabitacion }}</p>
+                    <p><strong>Tipo de habitación:</strong> {{ habitacion.tipo.nombre }}</p>
+                    <p><strong>Capacidad:</strong> {{ habitacion.capacidad }} personas</p>
+                    <p><strong>Precio por noche:</strong> ${{ habitacion.precioPorNoche|intcomma }}</p>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">Complete los datos de reserva</h5>
+                    <form method="POST"
+                        action="{% url 'realizar_reserva' hotel_slug=hotel_slug habitacion_slug=habitacion_slug %}">
+
+                        {% csrf_token %}
+
+                        <!-- Agrega los campos para los datos del usuario -->
+                        <div class="form-group">
+                            <label for="nombre">Nombre:</label>
+                            <input type="text" class="form-control" id="nombre" name="nombre" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email:</label>
+                            <input type="email" class="form-control" id="email" name="email" required>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Realizar Reserva</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
