@@ -16,3 +16,4 @@ Cambios a futuro:
 2. Implementar contenido en las secciones de 'Acerca de' y 'Contacto'
 3. Añadir un detalle de habitaciones al reservar una habitacion.
 4. Añadir logica detras de la reserva de habitaciones (crear modelo de reservas, no mostrar una habitacion si ya esta reservada, etc...)
+"# ingSoftwareSprint3" 
