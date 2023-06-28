@@ -1,0 +1,49 @@
+{% block info-usuario %}
+<p>Nombre: {{ nombre }}</p>
+<p>Apellido: {{ apellido }}</p>
+<p>Nombre de Usuario: {{ nombre_usuario }}</p>
+<a href="#" id="cambiar-contrasena">¿Deseas cambiar tu contraseña?</a>
+
+<div id="formulario-contrasena" style="display: none;">
+    <form id="cambiar-contrasena-form" method="POST" action="{% url 'cambiar_contrasena' %}">
+        {% csrf_token %}
+        <!-- Agrega aquí los campos del formulario de cambio de contraseña -->
+        <input type="password" name="contrasena_actual" placeholder="Contraseña actual" required>
+        <input type="password" name="nueva_contrasena" placeholder="Nueva contraseña" required>
+        <input type="password" name="confirmar_contrasena" placeholder="Confirmar contraseña" required>
+        <div id="mensaje-error">
+            {% if errors|length >= 1 %}
+            <ul>
+                {% for error in errors %}
+
+                <li>{{ error }}</li>
+
+                <style>
+                    #mensaje-error {
+                        display: block;
+                    }
+                </style>
+                {% endfor %}
+            </ul>
+            {% else %}
+            <style>
+                #mensaje-error {
+                    display: none;
+                }
+            </style>
+            {% endif %}
+
+        </div>
+        <button type="submit">Cambiar Contraseña</button>
+    </form>
+</div>
+{% endblock %}
+
+<script>
+    $(document).ready(function () {
+        $('#cambiar-contrasena').click(function (e) {
+            e.preventDefault();
+            $('#formulario-contrasena').toggle();
+        });
+    });
+</script>

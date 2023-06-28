@@ -26,6 +26,7 @@
 
 
     <div id="container" class="container">
+        
         <div id="login" class="form-container">
             <h2>Iniciar Sesión</h2>
             <br>
@@ -45,15 +46,19 @@
                     {% if error_message %}
                     <p>{{ error_message }}</p>
                     <style>
-                        #mensaje-error {display: block;}
+                        #mensaje-error {
+                            display: block;
+                        }
                     </style>
                     {% else %}
                     <style>
-                        #mensaje-error {display: none;}
+                        #mensaje-error {
+                            display: none;
+                        }
                     </style>
                     {% endif %}
-                    
-                    </div>
+
+                </div>
                 <button type="submit" class="btn btn-primary mb-2">Iniciar Sesión</button>
             </form>
             <p><a href="{% url 'registrarse' %}" id="enlace-login-registro">¿Aun no tienes cuenta? ¡Registrate aquí!</a>

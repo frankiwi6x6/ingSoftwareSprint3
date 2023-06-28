@@ -28,10 +28,7 @@
                     data-target="#collapse{{ servicio.idServicio }}" aria-expanded="true"
                     aria-controls="collapse{{ servicio.idServicio }}">
                     <i class="bi bi-caret-down-fill"></i>
-
                     {{ servicio.nombre }}
-
-
                     </a>
             </h2>
         </div>
@@ -40,7 +37,6 @@
             <div class="card-body">
                 <ul>
                     {% for subservicio in servicio.subservicio_set.all %}
-
                     <div class="media">
                         <img src="{{ subservicio.imagen.url }}" class="mr-3" alt="Imagen del subservicio">
                         <div class="media-body">
@@ -50,13 +46,10 @@
                                 <tr>
                                     <th>
                                         <h5><i class="bi bi-clock"></i> Horarios</h5>
-
                                     </th>
                                     <hr>
                                 </tr>
-
                                 <tr>
-
                                     <td class="horario">
                                         <p>Apertura:</p>
                                     </td>
@@ -65,7 +58,6 @@
                                         <p>Abierto las 24 horas</p>
                                         {% else %}
                                         <p>{{ subservicio.horarioApertura }}</p>
-
                                     </td>
                                 </tr>
                                 <tr>
@@ -78,17 +70,29 @@
                                     </td>
                                 </tr>
                             </table>
-
-
                         </div>
                     </div>
                     <hr>
                     {% endfor %}
-
                 </ul>
             </div>
         </div>
     </div>
     {% endfor %}
 </div>
+
 {% endblock %}
+<script>
+    $(document).ready(function() {
+    // Obtener el valor del parámetro de la URL
+    var urlParams = new URLSearchParams(window.location.search);
+    var reservaNotificacion = urlParams.get('notificacion');
+    
+    // Mostrar la notificación correspondiente
+    if (reservaNotificacion === 'exitosa') {
+        swal("¡Reserva exitosa!", "Tu reserva ha sido realizada correctamente.", "success");
+    } else if (reservaNotificacion === 'error') {
+        swal("¡Error!", "Ha ocurrido un problema al realizar la reserva.", "error");
+    }
+});
+</script>

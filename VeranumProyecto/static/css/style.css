@@ -149,3 +149,6 @@ html {
   margin-top: 5px;
   text-align: left;
 }
+#contenido-perfil  .card {
+  min-height: 200px;
+}

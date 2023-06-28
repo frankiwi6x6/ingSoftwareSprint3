@@ -18,7 +18,7 @@
 </ul>
 {% endblock %}
 {% block content %}
-<div class="buscar-habitaciones">
+<div class="buscar-habitaciones m-lg-auto">
     <form method="POST" action="{% url 'resultados_habitaciones' %}">
         {% csrf_token %}
         <div class="form-row">
@@ -46,7 +46,36 @@
                 <input type="number" class="form-control" name="personas" id="personas">
             </div>
         </div>
-        <div>
+        <div class="container">
+            <div class="row align-content-center">
+                <div class="col-md-9">
+                    <div id="mensaje-error">
+                        {% if errors|length >= 1 %}
+                        <ul>
+                            {% for error in errors %}
+                            
+                            <li>{{ error }}</li>
+                            
+                            <style>
+                                #mensaje-error {
+                                    display: block;
+                                }
+                            </style>
+                            {% endfor %}
+                        </ul>
+                        {% else %}
+                        <style>
+                            #mensaje-error {
+                                display: none;
+                            }
+                        </style>
+                        {% endif %}
+
+                    </div>
+                    <div></div>
+                </div>
+            </div>
+
             <button type="submit" class="col-md-9 mt-3 btn btn-primary">RESERVAR HABITACIÓN AHORA</button>
         </div>
     </form>

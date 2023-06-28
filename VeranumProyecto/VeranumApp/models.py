@@ -35,13 +35,19 @@ class Habitacion(models.Model):
         return f'{self.tipo.nombre} - {self.idHotel.nombre}'
 
 class Reserva(models.Model):
+    idReserva = models.AutoField(primary_key=True)
     idHotel = models.ForeignKey(Hotel, on_delete=models.CASCADE)
     habitacion = models.ForeignKey(Habitacion, on_delete=models.CASCADE)
-    fecha_entrada = models.DateField()
-    fecha_salida = models.DateField()
+    fecha_entrada = models.CharField(max_length=9)
+    fecha_salida = models.CharField(max_length=9)
     dias_estancia = models.IntegerField()
-    total = models.DecimalField(max_digits=8, decimal_places=2)
+    total = models.DecimalField(max_digits=15, decimal_places=0)
     usuario = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f"Reserva ({self.idReserva}) de {self.usuario.username} " 
+    
+
 
 class ServicioHoteleria(models.Model):
     idServicio = models.AutoField(primary_key=True)

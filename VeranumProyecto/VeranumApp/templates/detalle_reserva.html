@@ -1,0 +1,11 @@
+{% block detalle_reserva %}
+    {% if reserva_actual %}
+        <p>Fecha de entrada: {{ reserva_actual.fecha_entrada }}</p>
+        <p>Fecha de salida: {{ reserva_actual.fecha_salida }}</p>
+        <p>Habitación: {{ reserva_actual.habitacion.numeroHabitacion }}</p>
+        <!-- Otros detalles de la reserva -->
+    {% else %}
+        <p>No hay reserva activa.</p>
+        <!-- Agregar un enlace o un botón para redirigir a la página de reserva -->
+    {% endif %}
+{% endblock %}

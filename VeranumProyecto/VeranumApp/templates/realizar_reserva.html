@@ -29,12 +29,92 @@
             <div class="card mb-3">
                 <div class="card-body">
                     <h5 class="card-title">Detalles de la reserva</h5>
-                    <p><strong>Hotel:</strong> {{ hotel.nombre }}</p>
-                    <p><strong>Habitación:</strong> {{ habitacion.numeroHabitacion }}</p>
-                    <p><strong>Tipo de habitación:</strong> {{ habitacion.tipo.nombre }}</p>
-                    <p><strong>Capacidad:</strong> {{ habitacion.capacidad }} personas</p>
-                    <p><strong>Precio por noche:</strong> ${{ habitacion.precioPorNoche|intcomma }}</p>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <strong>Hotel:</strong>
+                            </div>
+                            <div class="col-md-6">
+                                {{ hotel.nombre }}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <strong>Habitación:</strong>
+                            </div>
+                            <div class="col-md-6">
+                                {{ habitacion.numeroHabitacion }}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <strong>Tipo de habitación:</strong>
+                            </div>
+                            <div class="col-md-6">
+                                {{ habitacion.tipo.nombre }}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <strong>Capacidad:</strong>
+                            </div>
+                            <div class="col-md-6">
+                                {{ habitacion.capacidad }} personas
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <strong>Precio por noche:</strong>
+                            </div>
+                            <div class="col-md-6">
+                                $ {{ habitacion.precioPorNoche|floatformat:0|intcomma}}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <strong>Días de estancia:</strong>
+                            </div>
+                            <div class="col-md-6">
+                                {{ dias_estancia }}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <strong>Fecha de entrada:</strong>
+                            </div>
+                            <div class="col-md-6">
+                                <input type="date" name="fecha_entrada" value="{{ fecha_entrada }}">
+                                
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                
+                                <strong>Fecha de salida:</strong>
+                            </div>
+                            <div class="col-md-6">
+                                <input type="date" name="fecha_salida" value="{{ fecha_salida }}">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <strong>Cantidad de personas:</strong>
+                            </div>
+                            <div class="col-md-6">
+                                {{ personas }}
+                            </div>
+                        </div>
 
+                        <hr>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <strong>Total:</strong>
+                            </div>
+                            <div class="col-md-6">
+                                $ {{ total|floatformat:0|intcomma}}
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -42,11 +122,8 @@
             <div class="card mb-3">
                 <div class="card-body">
                     <h5 class="card-title">Complete los datos de reserva</h5>
-                    <form method="POST"
-                        action="{% url 'realizar_reserva' hotel_slug=hotel_slug habitacion_slug=habitacion_slug %}">
-
+                    <form method="POST" action="{% url 'crear_reserva' %}">
                         {% csrf_token %}
-
                         <!-- Agrega los campos para los datos del usuario -->
                         <div class="form-group">
                             <label for="nombre">Nombre:</label>
@@ -56,12 +133,32 @@
                             <label for="email">Email:</label>
                             <input type="email" class="form-control" id="email" name="email" required>
                         </div>
-
-                        <button type="submit" class="btn btn-primary">Realizar Reserva</button>
+                        
+                        <!-- Agrega los campos ocultos -->
+                        <input type="hidden" name="hotel_id" value="{{ hotel.idHotel }}">
+                        <input type="hidden" name="habitacion_id" value="{{ habitacion.idHabitacion }}">
+                        <input type="hidden" name="checkin" value="{{ fecha_entrada }}">
+                        <input type="hidden" name="checkout" value="{{ fecha_salida }}">
+                        <input type="hidden" name="estancia" value="{{ dias_estancia }}">
+                        <input type="hidden" name="total" value="{{ total|floatformat:0  }}">
+                        <input type="text" name="usuario" value="{{ user.username  }}">
+                        
+                        <input type="hidden" name="confirmado" value="1">
+                        <button type="submit" name="confirmado" value="1" class="btn btn-primary">Realizar Reserva</button>
                     </form>
                 </div>
             </div>
         </div>
     </div>
 </div>
+<script>
+    function confirmarReserva() {
+    if (confirm("¿Estás seguro de que deseas realizar la reserva?")) {
+        // Aquí puedes agregar código adicional si es necesario
+
+        // Envía el formulario
+        document.getElementById("formulario-reserva").submit();
+    }
+}
+</script>
 {% endblock %}
