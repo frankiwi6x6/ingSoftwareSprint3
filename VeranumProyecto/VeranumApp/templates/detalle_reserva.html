@@ -1,11 +1,24 @@
 {% block detalle_reserva %}
-    {% if reserva_actual %}
-        <p>Fecha de entrada: {{ reserva_actual.fecha_entrada }}</p>
-        <p>Fecha de salida: {{ reserva_actual.fecha_salida }}</p>
-        <p>Habitación: {{ reserva_actual.habitacion.numeroHabitacion }}</p>
-        <!-- Otros detalles de la reserva -->
-    {% else %}
-        <p>No hay reserva activa.</p>
-        <!-- Agregar un enlace o un botón para redirigir a la página de reserva -->
-    {% endif %}
+{% if reserva_actual %}
+{% if reserva_actual %}
+  <p>Fecha de entrada: {{ reserva_actual.fecha_entrada }}</p>
+  <p>Fecha de salida: {{ reserva_actual.fecha_salida }}</p>
+  <p>Habitación: {{ reserva_actual.habitacion.numeroHabitacion }}</p>
+  <!-- Otros detalles de la reserva -->
+
+  <form method="POST" action="{% url 'eliminar_reserva' reserva_actual.idReserva %}">
+    {% csrf_token %}
+    <input type="hidden" name="fecha_entrada" value="{{ reserva_actual.fecha_entrada }}">
+    <input type="hidden" name="fecha_salida" value="{{ reserva_actual.fecha_salida }}">
+    <input type="hidden" name="habitacion_id" value="{{ reserva_actual.habitacion.idHabitacion }}">
+    <!-- Otros campos ocultos con información adicional -->
+
+    <button class="btn btn-danger">Cancelar reserva</button>
+  </form>
+{% endif %}
+{% else %}
+<p class="fw-bold">No hay reserva activa.</p>
+<a class="btn btn-primary " href="{% url 'buscar_habitaciones' %}">Reserva una habitación!</a>
+<!-- Agregar un enlace o un botón para redirigir a la página de reserva -->
+{% endif %}
 {% endblock %}

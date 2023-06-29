@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Hotel, Habitacion, ServicioHoteleria, Reserva
+from .models import Hotel, Habitacion, ServicioHoteleria, Reserva, Subservicio
 from datetime import datetime
 from django.contrib.auth.models import User
 from django.shortcuts import render, redirect, HttpResponse
@@ -9,6 +9,8 @@ from django.contrib.auth import logout, authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.utils import timezone
 from django.contrib import messages
+
+
 def buscar_habitaciones(request):
     hoteles = Hotel.objects.all()
     return render(request, "buscar_habitaciones.html", {"hoteles": hoteles})
@@ -165,11 +167,43 @@ def crear_reserva(request):
         
         return redirect('/servicios/?notificacion=exitosa')
 
+def eliminar_reserva(request, reserva_id):
+    reserva = Reserva.objects.get(idReserva=reserva_id)
+    
+    if request.method == 'POST':
+        # Procesar la eliminación de la reserva
+        reserva.delete()
+        
+        # Redirigir a la página de éxito o a donde desees
+        messages.success(request, 'La reserva ha sido eliminada correctamente.')
+        return redirect('perfil')
+    
+    context = {
+        'reserva_actual': reserva
+    }
+    return render(request, 'eliminar_reserva.html', context)
+
 def servicios_subservicios(request):
     servicios = ServicioHoteleria.objects.all()
     return render(request, "servicios.html", {"servicios": servicios})
 
+def crear_subservicio(request):
+    if request.method == 'POST':
+        nombre = request.POST.get('nombre')
+        descripcion = request.POST.get('descripcion')
+        horarioApertura = request.POST.get('horarioApertura')
+        horarioCierre = request.POST.get('horarioCierre')
+        servicio_id = request.POST.get('servicio')
+        imagen = request.FILES['imagen']  # Cambio aquí: Utiliza request.FILES.get() para obtener el archivo cargado
 
+        # Crea el objeto Subservicio y guárdalo en la base de datos
+        subservicio = Subservicio(nombre=nombre, descripcion=descripcion, horarioApertura=horarioApertura,
+                                  horarioCierre=horarioCierre, servicio_id=servicio_id, imagen=imagen)
+        subservicio.save()
+
+        return redirect('servicios')  # Reemplaza 'pagina_exito' con la URL de la página de éxito
+    
+    return render(request, 'crear_subservicio.html')
 def acerca_de(request):
     return render(request, "acerca_de.html", {})
 
@@ -177,6 +211,8 @@ def acerca_de(request):
 def registrarse(request):
     return render(request, "register.html", {})
 
+def contacto(request):
+    return render(request, 'contacto.html')
 
 def registro(request):
     if request.method == "POST":

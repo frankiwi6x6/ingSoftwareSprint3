@@ -12,31 +12,161 @@
         <a class="nav-link" href="{% url 'acerca_de' %}">Acerca de</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="#">Contacto</a>
+        <a class="nav-link" href="{% url 'contacto' %}"">Contacto</a>
     </li>
 </ul>
 {% endblock %}
 {% block empleado %}
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <a class="navbar-brand" href="#">Controles del empleado | Servicios</a>
-    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#employeeNavbar"
-        aria-controls="employeeNavbar" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+        data-target="#employeeNavbar" aria-controls="employeeNavbar" aria-expanded="false"
+        aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="employeeNavbar">
         <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-                <a class="nav-link" href="#">Agregar</a>
+                <a class="nav-link" href="#" data-toggle="modal" data-target="#agregarModal">Agregar</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Modificar</a>
+                <a class="nav-link" href="#" data-toggle="modal" data-target="#modificarModal">Modificar</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Desactivar</a>
+                <a class="nav-link" href="#" data-toggle="modal" data-target="#desactivarModal">Desactivar</a>
             </li>
         </ul>
     </div>
 </nav>
+
+<!-- Modales -->
+<div class="modal fade" id="agregarModal" tabindex="-1" role="dialog" aria-labelledby="agregarModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="agregarModalLabel">Agregar Subservicio</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="{% url 'crear_subservicio' %}" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="container">
+                        <div class="row mb-2 ">
+                            <input class="form-control col-md-12" type="text" name="nombre"
+                                placeholder="Nombre del servicio...">
+                        </div>
+                        <div class="row mb-2 ">
+                            <textarea class="form-control" name="descripcion"
+                                placeholder="Descripción del servicio..."></textarea>
+                        </div>
+                        <div class="row mb-2 ">
+                            <div class="col-md-3"><label class="col-form-label" for="horarioApertura">Apertura: </label>
+                            </div>
+                            <input class="form-control col-md-9" type="time" name="horarioApertura">
+                        </div>
+                        <div class="row mb-2 ">
+                            <div class="col-md-3"><label class="col-form-label" for="horarioCierre">Cierre: </label>
+                            </div>
+                            <input class="form-control col-md-9" type="time" name="horarioCierre">
+                        </div>
+
+                        <div class="row mb-2">
+                            <select class="form-control" name="servicio">
+                                <option value="0">Seleccione un servicio...</option>
+                                {% for servicio in servicios %}
+                                <option value="{{ servicio.idServicio}}">{{servicio.nombre}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <input type="file" id="fileInput" name="imagen">
+                        <label for="fileInput" class="custom-file-upload" onchange="updateFileName"></label>
+
+                    </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                <button type="submit" class="btn btn-primary">Guardar</button>
+            </div>
+            </form>
+        </div>
+
+
+    </div>
+</div>
+</div>
+
+<div class="modal fade" id="modificarModal" tabindex="-1" role="dialog" aria-labelledby="modificarModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modificarModalLabel">Modificar Subservicio</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="" method="post">
+                    <div class="container">
+                        <div class="row">
+                            <input type="text" name="nombre">
+
+                        </div>
+                        <div class="row">
+                            <textarea name="descripcion"></textarea>
+
+                        </div>
+                        <div class="row">
+                            <input type="time" name="horarioApertura">
+
+                        </div>
+                        <div class="row">
+                            <input type="time" name="horarioCierre">
+
+                        </div>
+                        <div class="row">
+
+                            <select name="servicio">...</select>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-primary">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="desactivarModal" tabindex="-1" role="dialog" aria-labelledby="desactivarModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="desactivarModalLabel">Desactivar Subservicio</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <input type="text" name="nombre">
+                <textarea name="descripcion"></textarea>
+                <input type="time" name="horarioApertura">
+                <input type="time" name="horarioCierre">
+                <select name="servicio">...</select>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-primary">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 {% endblock %}
 {% block content %}
@@ -118,4 +248,9 @@
             swal("¡Error!", "Ha ocurrido un problema al realizar la reserva.", "error");
         }
     });
+    function updateFileName(input) {
+        var fileName = input.files[0].name;
+        var fileNameLabel = document.getElementById("fileNameLabel");
+        fileNameLabel.innerText = fileName;
+    }
 </script>

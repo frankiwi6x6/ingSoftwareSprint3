@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block navbar %}
+<ul class="navbar-nav">
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'buscar_habitaciones' %}">Inicio</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'servicios' %}">Servicios</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'acerca_de' %}">Acerca de</a>
+    </li>
+    <li class="nav-item active">
+        <a class="nav-link" href="{% url 'contacto' %}">Contacto</a>
+    </li>
+</ul>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2>Contacto</h2>
+    <form>
+        <div class="form-group">
+            <label for="telefono">Teléfono:</label>
+            <input type="text" class="form-control" id="telefono" name="telefono" placeholder="Ingrese su teléfono">
+        </div>
+        <div class="form-group">
+            <label for="rut">RUT:</label>
+            <input type="text" class="form-control" id="rut" name="rut" placeholder="Ingrese su RUT">
+        </div>
+        <div class="form-group">
+            <label for="nombre">Nombre:</label>
+            <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Ingrese su nombre">
+        </div>
+        <div class="form-group">
+            <label for="apellidos">Apellidos:</label>
+            <input type="text" class="form-control" id="apellidos" name="apellidos" placeholder="Ingrese sus apellidos">
+        </div>
+        <button type="submit" class="btn btn-primary">Enviar</button>
+    </form>
+</div>
+{% endblock %}

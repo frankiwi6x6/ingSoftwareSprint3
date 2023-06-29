@@ -1,8 +1,15 @@
 {%block historial_de_reservas%}
+{% if reserva %}
 <ul>
     {% for reserva in reservas %}
     <li>{{ reserva }}</li>
     {% endfor %}
 </ul>
+{% else %}
+
+    
+    <p>No tienes ninguna reserva 😢</p>
+
+{%endif%} 
 
 {%endblock%}

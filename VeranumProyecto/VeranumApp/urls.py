@@ -16,4 +16,8 @@ urlpatterns = [
     path('perfil/',views.perfil, name='perfil'),
     path('cambiar_contrasena', views.cambiar_contrasena, name='cambiar_contrasena'),
     path('accounts/login/', views.iniciar_sesion, name='iniciar_sesion'),
+    path('eliminar_reserva/<int:reserva_id>/', views.eliminar_reserva, name='eliminar_reserva'),
+    path('crear_subservicio/', views.crear_subservicio, name='crear_subservicio'),
+    path('contacto/', views.contacto, name='contacto'),
+    
 ]
