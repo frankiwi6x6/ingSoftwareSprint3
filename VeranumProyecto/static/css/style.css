@@ -133,6 +133,10 @@ html {
   border: 1px #f05030;
   background-color: #f05030;
 }
+.login #btn-usuario:hover {
+  border: 1px #f05030;
+  background-color: #f05030;
+}
 
 .login button:active {
   border: 1px #f05030;
