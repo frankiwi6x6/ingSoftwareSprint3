@@ -1,40 +1,99 @@
 {% block info-usuario %}
-<p>Nombre: {{ nombre }}</p>
-<p>Apellido: {{ apellido }}</p>
-<p>Nombre de Usuario: {{ nombre_usuario }}</p>
-<a href="#" id="cambiar-contrasena">¿Deseas cambiar tu contraseña?</a>
-
+<div class="row">
+    <div class="col-md-2">
+        <p class="fw-bold">Nombre:</p>
+    </div>
+    <div class="col-md-10">
+        <p>{{ nombre }}</p>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-2">
+        <p class="fw-bold">Apellido:</p>
+    </div>
+    <div class="col-md-10">
+        <p>{{ apellido }}</p>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-2">
+        <p class="fw-bold">Nombre de Usuario:</p>
+    </div>
+    <div class="col-md-10">
+        <p>{{ nombre_usuario }}</p>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-2">
+        <p class="fw-bold">Correo:</p>
+    </div>
+    <div class="col-md-10">
+        <p>{{ email }}</p>
+    </div>
+</div>
+<div class="row">
+    <div class="container">
+        <a href="#" id="cambiar-contrasena" class="btn btn-primary col-md-12" style="margin-bottom: 1rem;">¿Deseas
+            cambiar tu
+            contraseña?</a>
+    </div>
+</div>
 <div id="formulario-contrasena" style="display: none;">
-    <form id="cambiar-contrasena-form" method="POST" action="{% url 'cambiar_contrasena' %}">
-        {% csrf_token %}
-        <!-- Agrega aquí los campos del formulario de cambio de contraseña -->
-        <input type="password" name="contrasena_actual" placeholder="Contraseña actual" required>
-        <input type="password" name="nueva_contrasena" placeholder="Nueva contraseña" required>
-        <input type="password" name="confirmar_contrasena" placeholder="Confirmar contraseña" required>
-        <div id="mensaje-error">
-            {% if errors|length >= 1 %}
-            <ul>
-                {% for error in errors %}
-
-                <li>{{ error }}</li>
-
+    <div id="mensaje-error">
+        <div class="container">
+            <div class="row">
+                {% if errors|length >= 1 %}
+                <ul>
+                    {% for error in errors %}
+                    <li>{{ error }}</li>
+                    <style>
+                        #mensaje-error {
+                            display: block;
+                        }
+                    </style>
+                    {% endfor %}
+                </ul>
+                {% else %}
                 <style>
                     #mensaje-error {
-                        display: block;
+                        display: none;
                     }
                 </style>
-                {% endfor %}
-            </ul>
-            {% else %}
-            <style>
-                #mensaje-error {
-                    display: none;
-                }
-            </style>
-            {% endif %}
-
+                {% endif %}
+            </div>
         </div>
-        <button type="submit">Cambiar Contraseña</button>
+    </div>
+    <form id="cambiar-contrasena-form" method="POST" action="{% url 'cambiar_contrasena' %}">
+        {% csrf_token %}
+        <div class="container container-password">
+            <div class="row">
+                <div class="col-md-3">
+                    <p class="fw-bold">Contraseña actual:</p>
+                </div>
+                <div class="col-md-9">
+                    <input type="password" class="form-control" id="contrasena_actual" name="contrasena_actual"
+                        required>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    <p class="fw-bold">Nueva contraseña</p>
+                </div>
+                <div class="col-md-9">
+                    <input type="password" class="form-control" id="nueva_contrasena" name="nueva_contrasena" required>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    <p class="fw-bold">Confirmar contraseña</p>
+                </div>
+                <div class="col-md-9">
+                    <input type="password" class="form-control" id="confirmar_contrasena" name="confirmar_contrasena"
+                        required>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary col-md-12">Cambiar Contraseña</button>
+        </div>
     </form>
 </div>
 {% endblock %}

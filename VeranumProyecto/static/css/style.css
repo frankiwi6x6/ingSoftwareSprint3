@@ -120,14 +120,13 @@ html {
   justify-content: center;
 }
 
-.login button, .login a {
+.login button,
+.login a {
 
   border: 1px #ff8650;
   background-color: #ff8650;
   min-width: 120px;
-  min-height: 24px;
-  margin-left: 10px;
-  margin-right: 10px;
+  min-height: 24px; 
 }
 
 .login button:hover {
@@ -149,6 +148,39 @@ html {
   margin-top: 5px;
   text-align: left;
 }
-#contenido-perfil  .card {
+
+.login .nav-link {
+
+  margin-bottom: .5rem;
+  margin-top: 1.5rem;
+}
+
+#contenido-perfil .card {
   min-height: 200px;
+}
+
+.fw-bold {
+  font-weight: bold;
+}
+
+.container-password {
+  margin-bottom: 1rem;
+}
+
+.container-password .row {
+  margin-bottom: 1rem;
+
+}
+
+.btn-user{
+  margin-right: 20px;
+}
+.btn-sesion{
+  min-width: 128px;
+}
+body{
+ transition: 0.3s ease-in;
+}
+.buscar-habitaciones form{
+  background-color: rgba(255,255,255 0.6);
 }

@@ -13,7 +13,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Satisfy&display=swap" rel="stylesheet">
-    
+
     <!-- <script src="{% static 'script.js' %}"></script> -->
 </head>
 
@@ -49,29 +49,36 @@
                 {% endblock %}
                 <ul class="navbar-nav ml-auto login">
                     {% if user.is_authenticated %}
-                    <li id="btn-usuario" class="nav-item ">
+
+                    <li class="nav-item btn-user">
                         <a class="btn btn-link nav-link" href="{% url 'perfil' %}">{{ user.username }}</a>
                     </li>
-                    <li class="nav-item">
+
+                    <li class="nav-item btn-sesion">
                         <form action="{% url 'logout' %}" method="POST">
                             {% csrf_token %}
                             <button class="btn btn-link nav-link" type="submit"><i
                                     class="fa-solid fa-arrow-right-from-bracket"></i> Cerrar sesión</button>
                         </form>
                     </li>
-                    {% else %}
-                    <li class="nav-item">
-                        <a class="btn btn-link nav-link" href="{% url 'iniciar_sesion' %}"><i
-                                class="bi bi-person"></i>&nbsp;Iniciar sesión</a>
-
-                    </li>
-                    {% endif %}
-                </ul>
+            </div>
+            {% else %}
+            <li class="nav-item btn-sesion">
+                <a class="btn btn-link nav-link" href="{% url 'iniciar_sesion' %}"><i
+                        class="bi bi-person"></i>&nbsp;Iniciar sesión</a>
+            </li>
+            </div>
+            {% endif %}
+            </ul>
             </div>
 
         </nav>
         {% endblock %}
-         
+        {% if user.is_staff %}
+        {% block empleado %}
+        {% endblock %}
+
+        {% endif %}
     </header>
     <div class="container">
         {% block content %}
@@ -79,7 +86,7 @@
 
     </div>
      
-    
+
     <footer>
         <p>© 2023 Veranum Hotel. Todos los derechos reservados.</p>
     </footer>

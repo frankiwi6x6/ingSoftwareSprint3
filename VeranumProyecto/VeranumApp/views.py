@@ -267,12 +267,14 @@ def perfil(request):
     nombre = usuario.first_name
     apellido = usuario.last_name
     nombre_usuario = usuario.username
+    email = usuario.email
     context = {
         'reservas': reservas,
         'reserva_actual': reserva_actual,
         'nombre': nombre,
         'apellido': apellido,
         'nombre_usuario': nombre_usuario,
+        'email' : email,
         'errores': get_error_messages(request),  # Obtener solo los mensajes de error
         'exitos': get_success_messages(request),  # Obtener solo los mensajes de éxito
     }

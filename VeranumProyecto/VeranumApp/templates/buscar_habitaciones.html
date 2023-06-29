@@ -18,68 +18,96 @@
 </ul>
 {% endblock %}
 {% block content %}
-<div class="buscar-habitaciones m-lg-auto">
-    <form method="POST" action="{% url 'resultados_habitaciones' %}">
-        {% csrf_token %}
-        <div class="form-row">
-            <div class="col-md-4 mb-3">
-                <label for="fecha-entrada">Fecha de entrada:</label>
-                <input type="date" class="form-control datepicker" name="fecha-entrada" id="fecha-entrada">
-            </div>
-            <div class="offset-1 col-md-4 mb-3">
-                <label for="fecha-salida">Fecha de salida:</label>
-                <input type="date" class="form-control datepicker" name="fecha-salida" id="fecha-salida">
-            </div>
-        </div>
-        <div class="form-row">
-            <div class="col-md-4 mb-3">
-                <label for="sucursal">Hotel:</label>
-                <br>
-                <select name="sucursal" class="form-control">
-                    {% for hotel in hoteles %}
-                    <option value="{{ hotel.idHotel }}">{{ hotel.nombre }}</option>
-                    {% endfor %}
-                </select>
-            </div>
-            <div class="offset-1 col-md-4 mb-3">
-                <label for="personas">Número de personas:</label>
-                <input type="number" class="form-control" name="personas" id="personas">
-            </div>
-        </div>
-        <div class="container">
-            <div class="row align-content-center">
-                <div class="col-md-9">
-                    <div id="mensaje-error">
-                        {% if errors|length >= 1 %}
-                        <ul>
-                            {% for error in errors %}
-                            
-                            <li>{{ error }}</li>
-                            
-                            <style>
-                                #mensaje-error {
-                                    display: block;
-                                }
-                            </style>
-                            {% endfor %}
-                        </ul>
-                        {% else %}
-                        <style>
-                            #mensaje-error {
-                                display: none;
-                            }
-                        </style>
-                        {% endif %}
-
-                    </div>
-                    <div></div>
+<div class="container-habitaciones pt-5">
+    <div class="buscar-habitaciones m-lg-auto p-3 pb-1"
+        style="background-color: rgba(255, 255, 255, 0.8); border-radius: 25px;">
+        <form method="POST" action="{% url 'resultados_habitaciones' %}">
+            {% csrf_token %}
+            <div class="form-row mb-5">
+                <div class="col-md-5">
+                    <label class="fw-bold" for="fecha-entrada">Fecha de entrada:</label>
+                    <input type="date" class="form-control datepicker" name="fecha-entrada" id="fecha-entrada">
+                </div>
+                <div class="col-md-2"></div>
+                <div class="col-md-5">
+                    <label class="fw-bold" for="fecha-salida">Fecha de salida:</label>
+                    <input type="date" class="form-control datepicker" name="fecha-salida" id="fecha-salida">
                 </div>
             </div>
+            <div class="form-row mb-5">
+                <div class="col-md-5">
+                    <label class="fw-bold" for="sucursal">Hotel:</label>
+                    <br>
+                    <select id="sucursal" name="sucursal" class="form-control">
+                        <option value="Seleccione un hotel">Seleccione un hotel...</option>
+                        {% for hotel in hoteles %}
+                        <option value="{{ hotel.idHotel }}">{{ hotel.nombre }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col-md-2"></div>
+                <div class="col-md-5 ">
+                    <label class="fw-bold" for="personas">Número de personas:</label>
+                    <input type="number" class="form-control" name="personas" id="personas">
+                </div>
+            </div>
+            <div class="container">
+                <div class="row align-content-center">
+                    <div class="col-md-12">
+                        <div id="mensaje-error">
+                            {% if errors|length >= 1 %}
+                            <ul>
+                                {% for error in errors %}
 
-            <button type="submit" class="col-md-9 mt-3 btn btn-primary">RESERVAR HABITACIÓN AHORA</button>
-        </div>
-    </form>
+                                <li>{{ error }}</li>
+
+                                <style>
+                                    #mensaje-error {
+                                        display: block;
+                                    }
+                                </style>
+                                {% endfor %}
+                            </ul>
+                            {% else %}
+                            <style>
+                                #mensaje-error {
+                                    display: none;
+                                }
+                            </style>
+                            {% endif %}
+
+                        </div>
+                        <div></div>
+                    </div>
+                </div>
+
+                <button type="submit" class="col-md-12 mt-3 btn btn-primary">RESERVAR HABITACIÓN AHORA</button>
+            </div>
+        </form>
+    </div>
 </div>
 
+<script>
+    // Obtener el elemento del combobox
+    var combobox = document.getElementById('sucursal');
 
+    // Asignar un evento de cambio al combobox
+    combobox.addEventListener('change', function () {
+        // Obtener el valor seleccionado del combobox
+        var selectedValue = combobox.value;
+
+        // Asignar la imagen de fondo correspondiente según el valor seleccionado
+        if (selectedValue === '1') {
+            document.body.style.backgroundImage = "url('../static/img/fondo-hotel-vina-Chile.jpg')";
+        } else if (selectedValue === '2') {
+            document.body.style.backgroundImage = "url('../static/img/fondo-hotel-pucon-Chile.jpg')";
+        } else if (selectedValue === '3') {
+            document.body.style.backgroundImage = "url('../static/img/fondo-hotel-santiago-Chile.jpg')";
+        }
+        // Agrega más condiciones según las opciones disponibles en el combobox
+
+        // Puedes ajustar otros estilos de fondo aquí, como el tamaño y la repetición de la imagen
+
+    });
+</script>
 {% endblock %}
